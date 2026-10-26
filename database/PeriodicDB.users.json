@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "6ada3170c2c0da33353b4cf7"
+  },
+  "firstName": "Test1",
+  "lastName": "User1",
+  "login": "testuser1",
+  "password": "123",
+  "email": "test1@email.com",
+  "role": "user"
+},
+{
+  "_id": {
+    "$oid": "6ada31f2c2c0da33353b4cfd"
+  },
+  "firstName": "Test2",
+  "lastName": "User2",
+  "login": "testuser2",
+  "password": "123",
+  "email": "test2@email.com",
+  "role": "user"
+},
+{
+  "_id": {
+    "$oid": "6ada3201c2c0da33353b4cff"
+  },
+  "firstName": "Test3",
+  "lastName": "User3",
+  "login": "testuser3",
+  "password": "123",
+  "email": "test3@email.com",
+  "role": "user"
+}]

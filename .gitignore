@@ -1,0 +1,10 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.pem
+id_rsa*
+id_ed25519*
+
+# dependencies
+node_modules/

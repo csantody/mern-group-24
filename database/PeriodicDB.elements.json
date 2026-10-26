@@ -1,0 +1,50 @@
+[{
+  "_id": {
+    "$oid": "6ada334dc2c0da33353b4d03"
+  },
+  "elementName": "Hydrogen",
+  "elementSymbol": "H",
+  "atomicNumber": 1,
+  "atomicWeight": 1.008,
+  "userId": "6ada3170c2c0da33353b4cf7"
+},
+{
+  "_id": {
+    "$oid": "6ada3476c2c0da33353b4d09"
+  },
+  "elementName": "Helium",
+  "elementSymbol": "He",
+  "atomicNumber": 2,
+  "atomicWeight": 4.003,
+  "userId": "6ada3170c2c0da33353b4cf7"
+},
+{
+  "_id": {
+    "$oid": "6ada34b9c2c0da33353b4d0d"
+  },
+  "elementName": "Carbon",
+  "elementSymbol": "C",
+  "atomicNumber": 6,
+  "atomicWeight": 12.011,
+  "userId": "6ada31f2c2c0da33353b4cfd"
+},
+{
+  "_id": {
+    "$oid": "6ada34eac2c0da33353b4d0f"
+  },
+  "elementName": "Nitrogen",
+  "elementSymbol": "N",
+  "atomicNumber": 7,
+  "atomicWeight": 14.007,
+  "userId": "6ada31f2c2c0da33353b4cfd"
+},
+{
+  "_id": {
+    "$oid": "6ada3513c2c0da33353b4d13"
+  },
+  "elementName": "Oxygen",
+  "elementSymbol": "O",
+  "atomicNumber": 8,
+  "atomicWeight": 15.999,
+  "userId": "6ada3201c2c0da33353b4cff"
+}]
