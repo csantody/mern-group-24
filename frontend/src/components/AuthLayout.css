@@ -1,0 +1,263 @@
+/* Login / Register layout. Uses the shared color tokens from index.css.
+   Classes are prefixed "entry-" so they don't clash with Auth.css or Landing.css. */
+
+.entry-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 64px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 40px;
+  background: var(--bg);
+}
+
+/* ---------- Left: intro ---------- */
+.entry-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.entry-intro-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.entry-title {
+  margin: 12px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(44px, 5.2vw, 72px);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.entry-lead {
+  margin: 0;
+  max-width: 470px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.entry-visual {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 3 / 2;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.entry-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-color-scheme: dark) {
+  .entry-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+  }
+}
+
+/* ---------- Right: form card ---------- */
+.entry-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.entry-card {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.entry-card-header h2 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.entry-card-header p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.entry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.entry-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.entry-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.entry-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.entry-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.entry-field input {
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.entry-field input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+.entry-field input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.entry-button {
+  height: 52px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--primary);
+  color: var(--primary-text);
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.entry-button:hover {
+  background: var(--primary-hover);
+}
+
+.entry-button:active {
+  transform: translateY(1px);
+}
+
+.entry-button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.entry-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.entry-switch {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.entry-switch a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.entry-switch a:hover {
+  text-decoration: underline;
+}
+
+.entry-message {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.entry-message-error {
+  background: #fde8e8;
+  color: #9b1c1c;
+}
+
+.entry-message-success {
+  background: #e6f6ec;
+  color: #1e6b3a;
+}
+
+/* ---------- Narrow screens: stack ---------- */
+@media (max-width: 900px) {
+  .entry-page {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 28px;
+    padding: 24px 16px 40px;
+  }
+
+  .entry-intro {
+    gap: 24px;
+  }
+
+  .entry-title {
+    font-size: 46px;
+  }
+
+  .entry-lead {
+    font-size: 15px;
+  }
+
+  .entry-visual {
+    max-width: none;
+    aspect-ratio: auto;
+    height: 200px;
+  }
+
+  .entry-card {
+    max-width: none;
+    padding: 24px;
+    gap: 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  .entry-row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
