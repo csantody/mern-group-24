@@ -7,7 +7,7 @@ import { ArrowLeft, CarFront, ChevronRight } from 'lucide-react-native';
 import { APP_MARK_XML, RIM_ICON_XML } from '@/logo';
 import { colors, fonts } from '@/theme';
 import { getUser } from '@/api';
-import { SessionSummary } from '@/mockData';
+//import { SessionSummary } from '@/mockData';
 
 // ------------------------------------------------------------
 // AppMark
@@ -286,18 +286,18 @@ const vehicleRowStyles = StyleSheet.create({
 // SessionRow
 // ------------------------------------------------------------
 // Figma: "Recent session" (Vehicle detail)
-export function SessionRow({ session, title, onPress }: { session: SessionSummary; title?: string; onPress: () => void }) {
+type SessionRowProps = { title: string; subtitle: string; value: string; valueLabel: string; onPress: () => void };
+
+export function SessionRow({ title, subtitle, value, valueLabel, onPress }: SessionRowProps) {
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [sessionRowStyles.row, pressed && { opacity: 0.85 }]}>
       <View style={sessionRowStyles.summary}>
-        <Text style={sessionRowStyles.date} numberOfLines={1}>{title ?? session.dateLabel}</Text>
-        <Text style={sessionRowStyles.sub} numberOfLines={1}>
-          {session.powerHp} hp · {session.torqueLbFt} lb-ft
-        </Text>
+        <Text style={sessionRowStyles.date} numberOfLines={1}>{title}</Text>
+        <Text style={sessionRowStyles.sub} numberOfLines={1}>{subtitle}</Text>
       </View>
       <View style={sessionRowStyles.result}>
-        <Text style={sessionRowStyles.time}>{session.zeroToHundredS.toFixed(1)} s</Text>
-        <Text style={sessionRowStyles.range}>0–100 km/h</Text>
+        <Text style={sessionRowStyles.time}>{value}</Text>
+        <Text style={sessionRowStyles.range}>{valueLabel}</Text>
       </View>
     </Pressable>
   );

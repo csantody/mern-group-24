@@ -11,10 +11,12 @@ export default function SessionsScreen() {
       <Text style={styles.heading}>Sessions</Text>
       <View style={{ gap: 10 }}>
         {mockSessions.map((s) => (
-          <SessionRow
+                    <SessionRow
             key={s.id}
-            session={s}
             title={`${getVehicle(s.vehicleId)?.name ?? 'Vehicle'} · ${s.dateLabel}`}
+            subtitle={`${s.powerHp} hp · ${s.torqueLbFt} lb-ft`}
+            value={`${s.zeroToHundredS.toFixed(1)} s`}
+            valueLabel="0–100 km/h"
             onPress={() => router.push({ pathname: '/session/[id]', params: { id: s.id } })}
           />
         ))}
