@@ -1,0 +1,1 @@
+export type SensorReading = { timestamp: number; x: number; y: number; z: number };
