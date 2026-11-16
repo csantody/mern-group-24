@@ -1,29 +1,27 @@
-import { useState } from 'react';
-import { View, Text, TextInput, Pressable, ScrollView, Image, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
+import { ReactNode, useState } from 'react';
+import { View, Text, TextInput, TextInputProps, Pressable, ScrollView, Image, KeyboardAvoidingView, Platform, ActivityIndicator, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Check } from 'lucide-react-native';
-import { AuthLogo } from './brand/AppMark';
-import { colors } from '../theme/colors';
-import { fonts } from '../theme/fonts';
+import { AuthLogo } from '@/components/ui';
+import { colors, fonts } from '@/theme';
 
 type Props = {
   heroTitle: string;
   heroText: string;
   cardTitle: string;
   cardText: string;
-  passwordLabel: string;
-  passwordLink: string;
   submitLabel: string;
   footerLink: string;
   onFooterLink: () => void;
-  onSubmit: (email: string, password: string, remember: boolean) => void;
+  children: ReactNode; // the form fields
+  error?: string;
+  loading?: boolean;
+  onSubmit: (remember: boolean) => void;
 };
 
-// Shared layout for Login and Register (the Figma screens are identical apart from text)
+// Shared layout for Login and Register
 export function AuthScreen(p: Props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(true);
 
   return (
@@ -41,7 +39,7 @@ export function AuthScreen(p: Props) {
               <Text style={styles.heroText}>{p.heroText}</Text>
             </View>
             <View style={styles.heroVisual}>
-              <Image source={require('../assets/brand/hero.jpg')} style={StyleSheet.absoluteFill} resizeMode="cover" />
+              <Image source={require('@/assets/images/hero.jpg')} style={StyleSheet.absoluteFill} resizeMode="cover" />
               <LinearGradient
                 colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.8)']}
                 locations={[0.25, 0.75]}
@@ -58,38 +56,16 @@ export function AuthScreen(p: Props) {
               <Text style={styles.cardText}>{p.cardText}</Text>
             </View>
 
-            <View style={{ gap: 20 }}>
-              <View style={styles.group}>
-                <Text style={styles.label}>Email</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Enter your email"
-                  placeholderTextColor={colors.auth.muted}
-                  value={email}
-                  onChangeText={setEmail}
-                  autoCapitalize="none"
-                  autoComplete="email"
-                  keyboardType="email-address"
-                />
-              </View>
-              <View style={styles.group}>
-                <View style={styles.rowBetween}>
-                  <Text style={styles.label}>{p.passwordLabel}</Text>
-                  <Text style={styles.link}>{p.passwordLink}</Text>
-                </View>
-                <TextInput
-                  style={styles.input}
-                  placeholder="••••••••"
-                  placeholderTextColor={colors.auth.muted}
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry
-                />
-              </View>
-            </View>
+            {!!p.error && <Text style={styles.error}>{p.error}</Text>}
 
-            <Pressable style={({ pressed }) => [styles.submit, pressed && { opacity: 0.85 }]} onPress={() => p.onSubmit(email, password, remember)}>
-              <Text style={styles.submitLabel}>{p.submitLabel}</Text>
+            <View style={{ gap: 20 }}>{p.children}</View>
+
+            <Pressable
+              style={({ pressed }) => [styles.submit, (pressed || p.loading) && { opacity: 0.85 }]}
+              disabled={p.loading}
+              onPress={() => p.onSubmit(remember)}
+            >
+              {p.loading ? <ActivityIndicator color={colors.white} /> : <Text style={styles.submitLabel}>{p.submitLabel}</Text>}
             </Pressable>
 
             <View style={styles.rowBetween}>
@@ -105,6 +81,19 @@ export function AuthScreen(p: Props) {
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
+  );
+}
+
+// One labelled input, styled like the Figma auth fields
+export function AuthField({ label, link, ...inputProps }: { label: string; link?: string } & TextInputProps) {
+  return (
+    <View style={styles.group}>
+      <View style={styles.rowBetween}>
+        <Text style={styles.label}>{label}</Text>
+        {!!link && <Text style={styles.link}>{link}</Text>}
+      </View>
+      <TextInput style={styles.input} placeholderTextColor={colors.auth.muted} {...inputProps} />
+    </View>
   );
 }
 
@@ -132,6 +121,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: { fontFamily: fonts.bold, fontSize: 32, color: colors.white },
   cardText: { fontFamily: fonts.regular, fontSize: 16, color: colors.auth.muted },
+  error: { fontFamily: fonts.medium, fontSize: 14, color: '#FF8A80' },
   group: { gap: 8 },
   label: { fontFamily: fonts.semibold, fontSize: 14, color: colors.white },
   link: { fontFamily: fonts.semibold, fontSize: 14, color: colors.primary },
