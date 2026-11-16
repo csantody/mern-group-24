@@ -5,6 +5,8 @@ require('dotenv').config();
 const { connectDB } = require('./db');
 const authRoutes = require('./routes/auth');
 
+const vehicleRoutes = require("./routes/vehicles");
+
 // MARK: Initialize Express
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,6 +17,7 @@ app.use(express.json());
 
 // MARK: Authentication API routes
 app.use('/api', authRoutes);
+app.use("/api/vehicles", vehicleRoutes);
 
 // MARK: Health endpoint
 app.get('/api/health', (req, res) => {
