@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../components/Logo.tsx'
-import { clearUser, getUser } from '../api.ts'
+import { getUser } from '../api.ts'
 import './Landing.css'
 
 const GITHUB_URL = 'https://github.com/csantody/mern-group-24'
@@ -51,18 +51,8 @@ function Landing() {
     return () => clearInterval(timer)
   }, [recording])
 
-  if (!user) {
-    return <Navigate to="/" replace />
-  }
-
-  const handleLogout = () => {
-    clearUser()
-    navigate('/')
-  }
-
-  const handleTryAccelly = () => {
-    setSeconds(0)
-    setRecording(true)
+  const handleGetStarted = () => {
+    navigate(user ? '/home' : '/login')
   }
 
   const handleGithub = () => {
@@ -99,9 +89,13 @@ function Landing() {
         </nav>
 
         <div className="nav-actions">
-          <span className="nav-user">Hi, {user.firstName}</span>
-          <button id="logout" type="button" className="btn btn-primary btn-cta" onClick={handleLogout}>
-            Log out
+          {!user && (
+            <Link id="navLogin" to="/login" className="nav-link nav-login">
+              Log in
+            </Link>
+          )}
+          <button id="navGetStarted" type="button" className="btn btn-primary btn-cta" onClick={handleGetStarted}>
+            {user ? 'Open garage' : 'Get started'}
           </button>
           <button
             id="menuToggle"
@@ -137,8 +131,8 @@ function Landing() {
             A starting point for understanding your vehicle&rsquo;s performance&mdash;when a dyno isn&rsquo;t within reach.
           </p>
           <div className="hero-buttons">
-            <button id="tryAccelly" type="button" className="btn btn-primary" onClick={handleTryAccelly}>
-              Try Accelly
+            <button id="getStarted" type="button" className="btn btn-primary" onClick={handleGetStarted}>
+              Get started
             </button>
             <button id="github" type="button" className="btn btn-outline" onClick={handleGithub}>
               Github

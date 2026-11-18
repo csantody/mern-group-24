@@ -28,7 +28,7 @@ function Register() {
       })
       if (status === 201) {
         // Back to the login page with a success message
-        navigate('/', { state: { registered: true } })
+        navigate('/login', { state: { registered: true } })
       } else {
         setError(data.error || 'Something went wrong. Please try again.')
       }
@@ -126,7 +126,7 @@ function Register() {
         </button>
 
         <p className="entry-switch">
-          Already have an account? <Link id="goToLogin" to="/">Log in</Link>
+          Already have an account? <Link id="goToLogin" to="/login">Log in</Link>
         </p>
       </form>
     </AuthLayout>

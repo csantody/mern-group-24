@@ -589,14 +589,12 @@
   }
 }
 
-.nav-user {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-muted);
+.nav-login {
+  padding: 8px 6px;
 }
 
 @media (max-width: 720px) {
-  .nav-user {
+  .nav-login {
     display: none;
   }
 }
